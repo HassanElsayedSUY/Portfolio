@@ -1,0 +1,554 @@
+/* CSS Variables for Theming - Dark Theme (Default) */
+:root {
+    --bg-primary: #0a0f1f;
+    --bg-secondary: #111827;
+    --bg-tertiary: #1f2937;
+    --bg-card: #1a202c;
+    --bg-input: #2d3748;
+    --bg-navbar-scrolled: rgba(17, 24, 39, 0.75);
+    --bg-mobile-menu: var(--bg-tertiary);
+    --bg-mobile-menu-backdrop: rgba(10, 15, 31, 0.5);
+    --bg-backdrop-blur: rgba(26, 32, 44, 0.6);
+
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --text-accent: #9f7aea;
+    --text-accent-hover: #b794f4;
+    --text-title: #ffffff;
+    --text-button: #ffffff;
+    --text-skill-value: #9f7aea;
+    --text-on-button-secondary: #e2e8f0;
+
+    --border-card: rgba(159, 122, 234, 0.2);
+    --border-input: #4a5568;
+    --border-image: #9f7aea;
+    --border-footer: #2d3748;
+
+    --hero-gradient-start: rgba(10, 15, 31, 0.85);
+    --hero-gradient-end: rgba(26, 32, 44, 0.95);
+    --particle-color: rgba(159, 122, 234, 0.25);
+    --typing-cursor: #9f7aea;
+    --section-title-line: linear-gradient(90deg, #805ad5, #b794f4);
+    --skill-bar-gradient: linear-gradient(90deg, #805ad5, #9f7aea, #b794f4);
+    --skill-bar-bg: #2d3748;
+
+    --button-primary-bg: #805ad5;
+    --button-primary-hover-bg: #6b46c1;
+    --button-secondary-bg: #2d3748;
+    --button-secondary-hover-bg: #4a5568;
+
+    --shadow-project-card-hover: 0 20px 40px -10px rgba(159, 122, 234, 0.3);
+    --shadow-button-hover: 0 6px 12px -2px rgba(159, 122, 234, 0.3), 0 3px 7px -3px rgba(159, 122, 234, 0.25);
+    --shadow-skill-item-static: 0 6px 12px -3px rgba(0,0,0,0.2), 0 4px 8px -4px rgba(0,0,0,0.15);
+    --shadow-navbar-scrolled: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS Variables for Theming - Light Theme */
+html[data-theme="light"] {
+    --bg-primary: #f7fafc;
+    --bg-secondary: #edf2f7;
+    --bg-tertiary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #e2e8f0;
+    --bg-navbar-scrolled: rgba(255, 255, 255, 0.75);
+    --bg-mobile-menu: var(--bg-secondary);
+    --bg-mobile-menu-backdrop: rgba(237, 242, 247, 0.5);
+    --bg-backdrop-blur: rgba(237, 242, 247, 0.6);
+
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --text-accent: #6b46c1;
+    --text-accent-hover: #553c9a;
+    --text-title: #1a202c;
+    --text-button: #ffffff;
+    --text-skill-value: #6b46c1;
+    --text-on-button-secondary: #2d3748;
+
+    --border-card: rgba(107, 70, 193, 0.3);
+    --border-input: #cbd5e0;
+    --border-image: #805ad5;
+    --border-footer: #e2e8f0;
+
+    --hero-gradient-start: rgba(237, 242, 247, 0.85);
+    --hero-gradient-end: rgba(226, 232, 240, 0.95);
+    --particle-color: rgba(107, 70, 193, 0.15);
+    --typing-cursor: #6b46c1;
+    --skill-bar-bg: #e2e8f0;
+
+    --button-primary-bg: #6b46c1;
+    --button-primary-hover-bg: #805ad5;
+    --button-secondary-bg: #e2e8f0;
+    --button-secondary-hover-bg: #cbd5e0;
+
+    --shadow-project-card-hover: 0 20px 40px -10px rgba(107, 70, 193, 0.25);
+    --shadow-button-hover: 0 6px 12px -2px rgba(107, 70, 193, 0.2), 0 3px 7px -3px rgba(107, 70, 193, 0.15);
+    --shadow-skill-item-static: 0 6px 12px -3px rgba(0,0,0,0.08), 0 4px 8px -4px rgba(0,0,0,0.04);
+    --shadow-navbar-scrolled: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+/* General Body Styles */
+body {
+    font-family: 'Cairo', sans-serif;
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+main {
+    flex-grow: 1;
+}
+body.mobile-menu-open-body-lock {
+     overflow-y: hidden;
+}
+
+/* Navbar Styles */
+#navbar {
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+#navbar.scrolled {
+    background-color: var(--bg-navbar-scrolled);
+    box-shadow: var(--shadow-navbar-scrolled);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+#navbar a, #mobile-menu a {
+    color: var(--text-primary);
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Added background-color transition for mobile links */
+}
+#navbar a:hover { /* Desktop nav hover */
+    color: var(--text-accent-hover);
+}
+
+/* START: Mobile Menu Animation Styles */
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0; /* Changed from right: 0 for RTL left-side menu */
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--bg-mobile-menu);
+    /* Shadow on the right side for a left-sliding menu */
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.2);
+    /* Initially hidden off-screen to the left */
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease-out, visibility 0s 0.4s;
+    z-index: 1000;
+    overflow-y: auto;
+    padding-top: 4.5rem; /* Increased padding for better spacing from top, adjust as needed */
+    padding-right: 1rem; /* Add padding for RTL content */
+    padding-left: 1rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#mobile-menu.open {
+    transform: translateX(0%); /* Slide in from the left */
+    opacity: 1;
+    visibility: visible;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease-out, visibility 0s 0s;
+}
+
+/* Styling for individual links in mobile menu */
+#mobile-menu .space-y-2 > a {
+    display: block;
+    padding: 0.85rem 1rem; /* Adjusted padding */
+    border-radius: 0.375rem; /* Tailwind's rounded-md */
+    font-weight: 600; /* Tailwind's font-semibold */
+    color: var(--text-primary);
+    text-align: right; /* Ensure text is aligned right for RTL */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-out;
+}
+
+#mobile-menu .space-y-2 > a:hover {
+    background-color: var(--bg-card); /* Use card background for hover, or a specific mobile menu hover var */
+    color: var(--text-accent-hover);
+    transform: translateX(-5px); /* Slight move to left on hover for RTL */
+}
+
+/* Staggered animation for mobile menu items */
+#mobile-menu.open .space-y-2 > a {
+    opacity: 0;
+    transform: translateX(-20px); /* Start from left for RTL */
+    animation: menuItemSlideInRTL 0.35s ease-out forwards;
+}
+
+#mobile-menu.open .space-y-2 > a:nth-child(1) { animation-delay: 0.1s; }
+#mobile-menu.open .space-y-2 > a:nth-child(2) { animation-delay: 0.17s; }
+#mobile-menu.open .space-y-2 > a:nth-child(3) { animation-delay: 0.24s; }
+#mobile-menu.open .space-y-2 > a:nth-child(4) { animation-delay: 0.31s; }
+#mobile-menu.open .space-y-2 > a:nth-child(5) { animation-delay: 0.38s; }
+/* Add more if there are more links, adjusting delay */
+
+@keyframes menuItemSlideInRTL {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-mobile-menu-backdrop);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-out, visibility 0s 0.4s;
+}
+.mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+/* END: Mobile Menu Animation Styles */
+
+#theme-toggle-button {
+    color: var(--text-primary);
+    transition: color 0.2s ease-in-out;
+}
+#theme-toggle-button:hover {
+    color: var(--text-accent-hover);
+}
+
+/* Hero Section Styles */
+.hero-bg {
+    background: linear-gradient(var(--hero-gradient-start), var(--hero-gradient-end)), url('https://picsum.photos/seed/hero-bg-theme-v5/1920/1080') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+.hero-bg-fallback {
+     background: linear-gradient(var(--hero-gradient-start), var(--hero-gradient-end)), url('https://placehold.co/1920x1080/0a0f1f/9f7aea?text=خلفية+مجرّدة+مذهلة') no-repeat center center;
+    background-size: cover;
+}
+.hero-bg h1, .hero-bg p:first-of-type {
+    color: var(--text-title);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.hero-bg p:last-of-type {
+    color: var(--text-primary);
+    text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+.hero-bg .text-indigo-300 { /* This class is not used directly in HTML for hero text, but keeping it in case it's added via JS or for other general use */
+     color: var(--text-accent);
+}
+.particles .particle {
+    background-color: var(--particle-color);
+}
+.typing-effect-container {
+    border-left: 4px solid var(--typing-cursor);
+    padding-left: 0.5rem;
+    /* Ensure it behaves like an inline element that can have a width */
+    display: inline-block;
+    /* Animation for the caret */
+    animation: blink-caret .75s step-end infinite;
+}
+html[dir="rtl"] .typing-effect-container { /* RTL specific for typing cursor */
+    border-left: none;
+    border-right: 4px solid var(--typing-cursor);
+    padding-left: 0;
+    padding-right: 0.5rem;
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--typing-cursor); }
+}
+.hero-bg a { /* Styling the "اكتشف أعمالي" button */
+    background-color: var(--button-primary-bg);
+    color: var(--text-button);
+}
+.hero-bg a:hover {
+    background-color: var(--button-primary-hover-bg);
+    box-shadow: var(--shadow-button-hover);
+}
+
+/* General Section Styles */
+.section-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.section-title {
+    color: var(--text-title);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.875rem;
+    margin-bottom: 3.5rem;
+    font-size: 2.5rem;
+}
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    height: 5px;
+    background: var(--section-title-line);
+    border-radius: 2.5px;
+    /* Default to right for RTL, as specified in the original HTML structure */
+    right: 0;
+}
+html[dir="rtl"] .section-title.text-center::after { /* Center for RTL */
+    right: 50%;
+    transform: translateX(50%);
+}
+html[dir="ltr"] .section-title.text-center::after { /* Center for LTR */
+    left: 50%;
+    transform: translateX(-50%);
+}
+html[dir="rtl"] .section-title:not(.text-center)::after { /* Align to right for RTL if not centered */
+     right: 0; left: auto; transform: none;
+}
+ html[dir="ltr"] .section-title:not(.text-center)::after { /* Align to left for LTR if not centered */
+     left: 0; right: auto; transform: none;
+}
+
+.bg-backdrop-blur-custom {
+    background-color: var(--bg-backdrop-blur);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.bg-secondary-custom {
+    background-color: var(--bg-secondary);
+}
+
+/* About Me Section Styles */
+#about h3 { color: var(--text-accent); font-size: 2rem; margin-bottom: 1.5rem;}
+#about p { color: var(--text-primary); line-height: 1.8; font-size: 1.05rem; }
+#about img {
+    border: 4px solid var(--border-image);
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+}
+#about img:hover {
+    border-color: var(--text-accent-hover);
+    box-shadow: 0 15px 30px -8px rgba(159,122,234,0.3);
+}
+
+/* Projects Section Styles */
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 0.75rem;
+}
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-project-card-hover);
+}
+.project-card h3 { color: var(--text-accent); font-size: 1.625rem; }
+.project-card p { color: var(--text-secondary); }
+.project-card .project-buttons a {
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+.project-card .project-buttons a:hover {
+     box-shadow: var(--shadow-button-hover);
+     transform: translateY(-2px);
+}
+.project-card .project-buttons a:first-of-type {
+    background-color: var(--button-primary-bg);
+    color: var(--text-button);
+}
+.project-card .project-buttons a:first-of-type:hover {
+    background-color: var(--button-primary-hover-bg);
+}
+.project-card .project-buttons a:last-of-type {
+    background-color: var(--button-secondary-bg);
+    color: var(--text-on-button-secondary);
+}
+.project-card .project-buttons a:last-of-type:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+/* Skills Section Styles */
+#skills .skill-category-title {
+    color: var(--text-accent);
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    padding-bottom: 0.75rem;
+    position: relative;
+    display: inline-block;
+}
+#skills .skill-category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--text-accent);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+html[dir="rtl"] #skills .skill-category-title.text-center::after {
+     right: 50%;
+     transform: translateX(50%);
+}
+html[dir="ltr"] #skills .skill-category-title.text-center::after {
+     left: 50%;
+     transform: translateX(-50%);
+}
+
+
+.skill-item {
+    background-color: var(--bg-card);
+    padding: 1.5rem 1.75rem;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-skill-item-static);
+    border: 1px solid var(--border-card);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-bottom: 1.75rem;
+}
+.skill-item:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: var(--shadow-project-card-hover);
+}
+.skill-item .skill-name-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.skill-item .skill-name-text {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.skill-item .skill-value {
+    color: var(--text-skill-value);
+    font-weight: 700;
+    font-size: 1.1rem;
+    direction: ltr;
+}
+.skill-bar-container {
+    height: 1rem;
+    background-color: var(--skill-bar-bg);
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+}
+.skill-bar {
+    height: 100%;
+    background: var(--skill-bar-gradient);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* For RTL, text inside bar might need adjustment if any */
+    width: 0%;
+    /* Added transition for smoother animation if JS updates width directly */
+    transition: width 0.5s ease-out; /* Adjust duration as needed, this is a fallback/enhancement */
+}
+
+/* Contact Section Styles */
+#contact .form-container {
+    background-color: var(--bg-tertiary);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+}
+@media (min-width: 640px) {
+    #contact .form-container {
+        padding: 3.5rem;
+    }
+}
+#contact label { color: var(--text-primary); font-weight: 600; }
+#contact input, #contact textarea {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-input);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+#contact input:focus, #contact textarea:focus {
+    border-color: var(--text-accent);
+    box-shadow: 0 0 0 3px rgba(159,122,234,0.3);
+}
+#contact button[type="submit"] {
+    background-color: var(--button-primary-bg);
+    color: var(--text-button);
+    font-weight: 600;
+    padding: 0.875rem 3rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+#contact button[type="submit"]:hover {
+    background-color: var(--button-primary-hover-bg);
+    box-shadow: var(--shadow-button-hover);
+    transform: translateY(-2px);
+}
+#contact .social-links-container p { color: var(--text-secondary); }
+#contact .social-links-container a {
+    color: var(--text-secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+#contact .social-links-container a:hover {
+    color: var(--text-accent-hover);
+    transform: scale(1.15);
+}
+#form-message.text-green-400 { color: #68d391; }
+html[data-theme="light"] #form-message.text-green-400 { color: #48bb78; }
+
+/* Footer Styles */
+footer {
+    background-color: var(--bg-tertiary);
+    border-top: 1px solid var(--border-footer);
+    padding: 2.5rem 1rem;
+    margin-top: auto;
+    text-align: center;
+}
+footer p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* General Reveal and Particle Styles */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+    transition: opacity 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+ .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 25s infinite ease-in-out;
+    opacity: 0;
+    background-color: var(--particle-color); /* This uses the CSS variable for particle color */
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.1; }
+    25% { transform: translateY(-25px) translateX(20px) scale(1.15); opacity: 0.3; }
+    50% { transform: translateY(15px) translateX(-15px) scale(0.85); opacity: 0.2; }
+    75% { transform: translateY(-20px) translateX(25px) scale(1.1); opacity: 0.35; }
+}
